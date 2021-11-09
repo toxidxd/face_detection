@@ -31,6 +31,12 @@ def face_rec(dataset):
         os.mkdir("dataset_photo")
         print("Directory dataset_photo created")
 
+    if os.path.exists("recognized_photos"):
+        print("Directory recognized_photos exists")
+    else:
+        os.mkdir("recognized_photos")
+        print("Directory recognized_photos created")
+
     photos = os.listdir("photos")
     print(f"Found {len(photos)} photos to recognize\n-------")
 
