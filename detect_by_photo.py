@@ -14,11 +14,12 @@ def dataset_create():
         face_enc = face_recognition.face_encodings(face_img)
 
         if len(face_enc) > 0:
-            enc_dataset.append(face_enc[0])
+            for _ in face_enc:
+                enc_dataset.append(_)
         else:
             print("++ No faces on photo!")
 
-    print(f"Dataset crated from {len(enc_dataset)} photos")
+    print(f"Dataset crated with {len(enc_dataset)} faces")
     return enc_dataset
 
 
