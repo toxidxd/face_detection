@@ -4,6 +4,13 @@ import shutil
 
 
 def dataset_create():
+    if os.path.exists("dataset_photo"):
+        pass
+        # print("Directory dataset_photo exists")
+    else:
+        os.mkdir("dataset_photo")
+        print("Directory dataset_photo created")
+
     print("Creating dataset...")
     enc_dataset = []
     images = os.listdir("dataset_photo")
@@ -18,21 +25,18 @@ def dataset_create():
                 enc_dataset.append(_)
         else:
             print("++ No faces on photo!")
-
-    print(f"Dataset crated with {len(enc_dataset)} faces")
+    if len(enc_dataset) > 0:
+        print(f"Dataset crated with {len(enc_dataset)} faces")
+    else:
+        print("No faces found on photos")
+        exit()
     return enc_dataset
 
 
 def face_rec(dataset):
-
-    if os.path.exists("dataset_photo"):
-        print("Directory dataset_photo exists")
-    else:
-        os.mkdir("dataset_photo")
-        print("Directory dataset_photo created")
-
     if os.path.exists("recognized_photos"):
-        print("Directory recognized_photos exists")
+        pass
+        # print("Directory recognized_photos exists")
     else:
         os.mkdir("recognized_photos")
         print("Directory recognized_photos created")
