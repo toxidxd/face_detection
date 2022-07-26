@@ -15,6 +15,7 @@ def dataset_create():
     enc_dataset = []
     images = os.listdir("dataset_photo")
 
+    f = 0
     for (i, img) in enumerate(images):
         print(f"+ Processing {i+1}/{len(images)} photo...")
         face_img = face_recognition.load_image_file(f"dataset_photo/{img}")
@@ -43,7 +44,7 @@ def face_rec(dataset):
 
     photos = os.listdir("photos")
     print(f"Found {len(photos)} photos to recognize\n-------")
-
+    f = 0
     for (i, img) in enumerate(photos):
         print(f"+ Processing {i + 1}/{len(photos)} photo...")
         face_img = face_recognition.load_image_file(f"photos/{img}")
@@ -57,6 +58,8 @@ def face_rec(dataset):
                     compare = face_recognition.compare_faces([enc_data], face)
                     if compare[0]:
                         print(f"++++ We have a match in {img}")
+                        f += 1
+                        print(f'++++ {f} photos recognized')
                         shutil.copy2(f"photos/{img}", "recognized_photos/")
                         break
 
