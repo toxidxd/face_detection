@@ -48,14 +48,16 @@ def face_rec(dataset):
     for (i, img) in enumerate(photos):
         print(f"+ Processing {i + 1}/{len(photos)} photo...")
         face_img = face_recognition.load_image_file(f"photos/{img}")
-        face_enc = face_recognition.face_encodings(face_img)
+        # face_enc = face_recognition.face_encodings(face_img)
+        face_enc = face_recognition.face_encodings(face_img, num_jitters=100)  # more accuracy
         print(f"++ Found {len(face_enc)} face on photo")
 
         if len(face_enc) > 0:
             for (j, face) in enumerate(face_enc):
                 print(f"+++ Processing {j+ 1}/{len(face_enc)} faces...")
                 for enc_data in dataset:
-                    compare = face_recognition.compare_faces([enc_data], face)
+                    # compare = face_recognition.compare_faces([enc_data], face)
+                    compare = face_recognition.compare_faces([enc_data], face, tolerance=0.6)  # more accuracy
                     if compare[0]:
                         print(f"++++ We have a match in {img}")
                         f += 1
